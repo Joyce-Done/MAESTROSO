@@ -1,0 +1,8 @@
+{
+  "name": "Maestroso",
+  "description": "Piano Practice Tracker tracking repertoire status, tempo goals, session detail, AI chat assistant, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

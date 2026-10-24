@@ -1,0 +1,144 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "Habit tracked by the user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "targetCount": { "type": "number" },
+        "unit": { "type": "string" },
+        "frequency": { "type": "string" },
+        "color": { "type": "string" },
+        "iconName": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "archived": { "type": "boolean" },
+        "order": { "type": "number" },
+        "isRoutine": { "type": "boolean" },
+        "routineTime": { "type": "string" },
+        "difficulty": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "category", "targetCount", "frequency", "createdAt"]
+    },
+    "HabitCompletion": {
+      "title": "HabitCompletion",
+      "description": "Habit completion entry for a date",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "habitId": { "type": "string" },
+        "date": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "value": { "type": "number" },
+        "completedAt": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "userId", "habitId", "date", "completed"]
+    },
+    "PianoSong": {
+      "title": "PianoSong",
+      "description": "Piano repertoire piece or hymn",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "composerOrArtist": { "type": "string" },
+        "category": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "targetBpm": { "type": "number" },
+        "currentBpm": { "type": "number" },
+        "keySignature": { "type": "string" },
+        "timeSignature": { "type": "string" },
+        "status": { "type": "string" },
+        "notes": { "type": "string" },
+        "pageNumberOrHymnNumber": { "type": "string" },
+        "totalPracticeMinutes": { "type": "number" },
+        "timesPracticed": { "type": "number" },
+        "lastPracticedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "composerOrArtist", "category", "status", "totalPracticeMinutes", "timesPracticed"]
+    },
+    "PianoPracticeLog": {
+      "title": "PianoPracticeLog",
+      "description": "Practice session record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "songId": { "type": "string" },
+        "songTitle": { "type": "string" },
+        "category": { "type": "string" },
+        "date": { "type": "string" },
+        "durationMinutes": { "type": "number" },
+        "tempoAchievedBpm": { "type": "number" },
+        "measuresFocused": { "type": "string" },
+        "notes": { "type": "string" },
+        "rating": { "type": "number" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "userId", "songTitle", "category", "date", "durationMinutes", "timestamp"]
+    },
+    "PracticeQuickNote": {
+      "title": "PracticeQuickNote",
+      "description": "Quick piano practice note or tip",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "songId": { "type": "string" },
+        "songTitle": { "type": "string" },
+        "category": { "type": "string" },
+        "text": { "type": "string" },
+        "tags": { "type": "array" },
+        "timestamp": { "type": "string" },
+        "pinned": { "type": "boolean" }
+      },
+      "required": ["id", "userId", "text", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "User's personalized habits"
+    },
+    "/users/{userId}/completions/{completionId}": {
+      "schema": "HabitCompletion",
+      "description": "User's habit completions by date"
+    },
+    "/users/{userId}/pianoSongs/{songId}": {
+      "schema": "PianoSong",
+      "description": "User's piano repertoire pieces"
+    },
+    "/users/{userId}/pianoLogs/{logId}": {
+      "schema": "PianoPracticeLog",
+      "description": "User's piano practice log history"
+    },
+    "/users/{userId}/quickNotes/{noteId}": {
+      "schema": "PracticeQuickNote",
+      "description": "User's quick notes and rehearsal cues"
+    }
+  }
+}
